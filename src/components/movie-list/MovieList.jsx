@@ -5,16 +5,11 @@ import './movie-list.scss';
 
 import { SwiperSlide, Swiper } from 'swiper/react';
 
-
-
-
 import tmdbApi, { category } from '../../api/tmdbApi';
-
 
 import MovieCard from '../movie-card/MovieCard';
 
 const MovieList = props => {
-
     const [items, setItems] = useState([]);
 
     useEffect(() => {
@@ -36,7 +31,7 @@ const MovieList = props => {
             setItems(response.results);
         }
         getList();
-    }, []);
+    }, [props.category, props.id, props.type]); // Add dependencies here
 
     return (
         <div className="movie-list">
@@ -59,7 +54,8 @@ const MovieList = props => {
 
 MovieList.propTypes = {
     category: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    id: PropTypes.number // Add PropTypes for id if it's used in the component
 }
 
 export default MovieList;
