@@ -1,0 +1,82 @@
+@use "../../scss/" as *;
+
+.episodes-container {
+    .swiper-slide {
+        width: 15%;
+
+        @include tablet {
+            width: 30%;
+        }
+
+        @include mobile {
+            width: 40%;
+        }
+    }
+
+    h2 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+.episode-card {
+    position: relative;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 10px;
+    border-radius: $border-radius;
+    margin-bottom: 1rem;
+
+    .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        z-index: 2; // Ensure the button is on top
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include mobile {
+            width: 50px; // Adjust size for mobile
+            height: 50px; // Adjust size for mobile
+        }
+
+        @include tablet {
+            width: 60px; // Adjust size for tablet
+            height: 60px; // Adjust size for tablet
+        }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: $black;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 10px;
+        z-index: 1; // Ensure the overlay is below the button
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover::before {
+            opacity: 0.8;
+        }
+
+        &:hover .btn {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+        .btn {
+            transform: translate(-50%, -50%) scale(1); // Always show button on touch devices
+        }
+    }
+}
