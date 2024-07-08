@@ -14,7 +14,7 @@ const Footer = () => {
                 <div className="footer__content__logo">
                     <div className="logo">
                         <img src={logo} alt="" />
-                        <Link to="/">ARK PLAY</Link>
+                        <Link to="/"> ARK PLAY </Link>
                     </div>
                 </div>
                 <div className="footer__content__menus">
