@@ -20,13 +20,16 @@ const TVShowEpisodes = ({ tvShowId, seasonNumber, onEpisodeSelect, onInitialEpis
             const response = await fetch(`${TMDB_BASE_URL}/tv/${tvShowId}/season/${seasonNumber}?api_key=${API_KEY}`);
             const data = await response.json();
             setEpisodes(data.episodes);
-            if (data.episodes.length > 0) {
-                onInitialEpisodeLoad(data.episodes[0]);
-            }
         };
 
         fetchEpisodes();
-    }, [tvShowId, seasonNumber, onInitialEpisodeLoad]);
+    }, [tvShowId, seasonNumber]);
+
+    useEffect(() => {
+        if (episodes.length > 0) {
+            onInitialEpisodeLoad(episodes[0]);
+        }
+    }, [episodes, onInitialEpisodeLoad]);
 
     return (
         <div className="episodes-container">
@@ -42,7 +45,7 @@ const TVShowEpisodes = ({ tvShowId, seasonNumber, onEpisodeSelect, onInitialEpis
                             <Button onClick={() => onEpisodeSelect(episode)}>
                                 <i className="bx bx-play"></i>
                             </Button>
-                            <img src={`${POSTER_IMAGE_URL}/${episode.still_path}`} alt={episode.name} />
+                            <img src={`${POSTER_IMAGE_URL}${episode.still_path}`} alt={episode.name} />
                         </div>
                         <p>{episode.name}</p>
                         <h3>Episode {episode.episode_number}</h3>

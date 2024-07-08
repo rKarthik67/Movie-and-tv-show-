@@ -38,15 +38,13 @@ const Detail = () => {
 
     const handleSeasonSelect = (seasonNumber) => {
         setSelectedSeasonNumber(seasonNumber);
+        setSelectedEpisode(null); // Reset selected episode when season changes
     };
 
     const handleEpisodeSelect = (episode) => {
+        console.log('Selected episode:', episode);
         setSelectedEpisode(episode);
         episodeSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    const handleInitialEpisodeLoad = (episode) => {
-        setSelectedEpisode(episode);
     };
 
     return (
@@ -114,7 +112,7 @@ const Detail = () => {
                                         <TVShowSeasons tvShowId={item.id} onSeasonSelect={handleSeasonSelect} />
                                     </div>
                                     <div ref={episodeSectionRef} className="episode-list">
-                                        <TVShowEpisodes tvShowId={item.id} seasonNumber={selectedSeasonNumber} onEpisodeSelect={handleEpisodeSelect} onInitialEpisodeLoad={handleInitialEpisodeLoad} />
+                                        <TVShowEpisodes tvShowId={item.id} seasonNumber={selectedSeasonNumber} onEpisodeSelect={handleEpisodeSelect} onInitialEpisodeLoad={setSelectedEpisode} />
                                     </div>
                                     {selectedEpisode && (
                                         <div className="episode-player">
