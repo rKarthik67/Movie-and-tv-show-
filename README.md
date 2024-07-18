@@ -1,4 +1,4 @@
-Production site working : https://arkplaymoviesandtvshows-karthikeyan.netlify.app
+Production site working : https://arkplaymoviesandtvshows.netlify.app
 
 # Getting Started with Create React App
 
