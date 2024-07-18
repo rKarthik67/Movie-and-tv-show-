@@ -15,6 +15,7 @@ const Detail = () => {
     const [item, setItem] = useState(null);
     const [selectedSeasonNumber, setSelectedSeasonNumber] = useState(1); // Default to season 1
     const [selectedEpisode, setSelectedEpisode] = useState(null);
+    const [currentServer, setCurrentServer] = useState(`https://player.smashy.stream/movie/${id}`);
     const videoSectionRef = useRef(null);
     const seasonsSectionRef = useRef(null);
     const episodeSectionRef = useRef(null);
@@ -45,6 +46,10 @@ const Detail = () => {
         console.log('Selected episode:', episode);
         setSelectedEpisode(episode);
         episodeSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleServerChange = (serverUrl) => {
+        setCurrentServer(serverUrl);
     };
 
     return (
@@ -98,13 +103,18 @@ const Detail = () => {
                             {category === 'movie' ? (
                                 <div ref={videoSectionRef} className="video-player">
                                     <iframe
-                                        src={`https://player.smashy.stream/movie/${item.id}`}
+                                        src={currentServer}
                                         width="100%"
                                         height="500px"
                                         frameBorder="0"
                                         allowFullScreen
                                         title="Movie Player"
                                     ></iframe>
+                                    <div className="server-buttons">
+                                        <Button onClick={() => handleServerChange(`https://player.smashy.stream/movie/${id}`)}>Server 1</Button>
+                                        <Button onClick={() => handleServerChange(`https://vidsrc.xyz/embed/movie/${id}`)}>Server 2</Button>
+                                        <Button onClick={() => handleServerChange(`https://multiembed.mov/?video_id=${id}&tmdb=1`)}>Server 3</Button>
+                                    </div>
                                 </div>
                             ) : (
                                 <div ref={seasonsSectionRef} className="seasons-sections">
@@ -117,13 +127,18 @@ const Detail = () => {
                                     {selectedEpisode && (
                                         <div className="episode-player">
                                             <iframe
-                                                src={`https://player.smashy.stream/tv/${id}?s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`}
+                                                src={currentServer}
                                                 width="100%"
                                                 height="500px"
                                                 frameBorder="0"
                                                 allowFullScreen
                                                 title="Episode Player"
                                             ></iframe>
+                                            <div className="server-buttons">
+                                                <Button onClick={() => handleServerChange(`https://player.smashy.stream/tv/${id}?s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`)}>Server 1</Button>
+                                                <Button onClick={() => handleServerChange(`https://vidsrc.xyz/embed/tv?tmdb=${id}&season=${selectedSeasonNumber}&episode=${selectedEpisode.episode_number}`)}>Server 2</Button>
+                                                <Button onClick={() => handleServerChange(`https://multiembed.mov/?video_id=${id}&tmdb=1&s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`)}>Server 3</Button>
+                                            </div>
                                         </div>
                                     )}
                                 </div>

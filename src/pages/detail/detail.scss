@@ -167,8 +167,49 @@
     }
 }
 
-.video-player{
+.video-player {
     margin-bottom: 3rem;
+
+    .server-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 23px;
+
+        & > button {
+            margin: 0 10px;
+
+            @include mobile {
+                margin: 0 5px;
+            }
+
+            @include tablet {
+                margin: 0 5px;
+            }
+        }
+    }
+}
+
+
+.seasons-sections{
+    margin-bottom: 3rem;
+
+    .server-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 23px;
+
+        & > button {
+            margin: 0 10px;
+
+            @include mobile {
+                margin: 0 5px;
+            }
+
+            @include tablet {
+                margin: 0 5px;
+            }
+        }
+    }
 }
 
 .episode-list {

@@ -10,7 +10,7 @@ import Button, { OutlineButton } from '../button/Button'
 import tmbdApi, { category, movieType } from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
 import { useNavigate } from 'react-router-dom';
-import Modal, {ModalContent} from '../modal/Modal';
+import Modal, { ModalContent } from '../modal/Modal';
 
 const HeroSlide = () => {
     SwiperCore.use([Autoplay]);
@@ -38,18 +38,18 @@ const HeroSlide = () => {
                 grabCursor={true}
                 spaceBetween={0}
                 slidesPerView={1}
-            // autoplay={{delay: 3000}}
+                autoplay={{ delay: 3000 }}
             >
                 {movieItems.map((item, i) => (
                     <SwiperSlide key={i}>
                         {({ isActive }) => (
-                            <HeroSlideItem item={item} className={`${isActive ? 'active': ''}`} />
+                            <HeroSlideItem item={item} className={`${isActive ? 'active' : ''}`} />
                         )}
                     </SwiperSlide>
                 ))}
             </Swiper>
             {
-                movieItems.map((item, i) => <TrailerModal key={i} item={item}/>)
+                movieItems.map((item, i) => <TrailerModal key={i} item={item} />)
             }
         </div>
     );
@@ -78,7 +78,7 @@ const HeroSlideItem = props => {
     }
 
     // console.log("item ID",item.id);
-    console.log("mediaType",item);
+    console.log("mediaType", item);
 
     return (
         <div
