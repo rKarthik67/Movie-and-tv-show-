@@ -15,7 +15,7 @@ const Detail = () => {
     const [item, setItem] = useState(null);
     const [selectedSeasonNumber, setSelectedSeasonNumber] = useState(1); // Default to season 1
     const [selectedEpisode, setSelectedEpisode] = useState(null);
-    const [currentServer, setCurrentServer] = useState(`https://multiembed.mov/?video_id=${id}&tmdb=1`);
+    const [currentServer, setCurrentServer] = useState(`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`);
     const videoSectionRef = useRef(null);
     const seasonsSectionRef = useRef(null);
     const episodeSectionRef = useRef(null);
@@ -31,7 +31,7 @@ const Detail = () => {
 
     useEffect(() => {
         if (category === 'tv' && selectedEpisode) {
-            setCurrentServer(`https://multiembed.mov/?video_id=${id}&tmdb=1&s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`);
+            setCurrentServer(`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`);
         }
     }, [category, id, selectedSeasonNumber, selectedEpisode]);
 
@@ -56,6 +56,7 @@ const Detail = () => {
 
     const handleServerChange = (serverUrl) => {
         setCurrentServer(serverUrl);
+        // console.log(currentServer)
     };
 
     return (
@@ -118,9 +119,10 @@ const Detail = () => {
                                     ></iframe>
                                     <div className="server-buttons">
                                         <Button onClick={() => handleServerChange(`https://vidsrc.xyz/embed/movie/${id}`)}>Server 1</Button>
-                                        <Button onClick={() => handleServerChange(`https://multiembed.mov/?video_id=${id}&tmdb=1`)}>Server 2</Button>
-                                        <Button onClick={() => handleServerChange(`https://player.smashy.stream/movie/${id}`)}>Server 3</Button>
+                                        <Button onClick={() => handleServerChange(`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`)}>Server 2</Button>
+                                        <Button onClick={() => handleServerChange(`https://multiembed.mov/?video_id=${id}&tmdb=1`)}>Server 3</Button>
                                         <Button onClick={() => handleServerChange(`https://moviesapi.club/movie/${id}`)}>Server 4</Button>
+                                        <Button onClick={() => handleServerChange(`https://player.smashy.stream/movie/${id}`)}>Server 5</Button>
                                     </div>
                                 </div>
                             ) : (
@@ -143,9 +145,10 @@ const Detail = () => {
                                             ></iframe>
                                             <div className="server-buttons">
                                                 <Button onClick={() => handleServerChange(`https://vidsrc.xyz/embed/tv?tmdb=${id}&season=${selectedSeasonNumber}&episode=${selectedEpisode.episode_number}`)}>Server 1</Button>
-                                                <Button onClick={() => handleServerChange(`https://multiembed.mov/?video_id=${id}&tmdb=1&s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`)}>Server 2</Button>
-                                                <Button onClick={() => handleServerChange(`https://player.smashy.stream/tv/${id}?s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`)}>Server 3</Button>
+                                                <Button onClick={() => handleServerChange(`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`)}>Server 2</Button>
+                                                <Button onClick={() => handleServerChange(`https://multiembed.mov/?video_id=${id}&tmdb=1&s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`)}>Server 3</Button>
                                                 <Button onClick={() => handleServerChange(`https://moviesapi.club/tv/${id}-${selectedSeasonNumber}-${selectedEpisode.episode_number}`)}>Server 4</Button>
+                                                <Button onClick={() => handleServerChange(`https://player.smashy.stream/tv/${id}?s=${selectedSeasonNumber}&e=${selectedEpisode.episode_number}`)}>Server 5</Button>
                                             </div>
                                         </div>
                                     )}
